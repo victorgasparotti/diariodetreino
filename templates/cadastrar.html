@@ -4,30 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ titulo }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>{{ titulo }}</h1>
-
-    <form action="/criar" method="POST">
-        <p>
-            <label>Exercício</label><br>
-            <input type="text" name="exercicio" required>
-        </p>
-        <p>
-            <label>Séries</label><br>
-            <input type="number" name="series" min="1" required>
-        </p>
-        <p>
-            <label>Repetições</label><br>
-            <input type="number" name="repeticoes" min="1" required>
-        </p>
-        <p>
-            <label>Data</label><br>
-            <input type="date" name="data" required>
-        </p>
-        <button type="submit">Salvar</button>
-    </form>
-
-    <a href="/">Voltar</a>
+    <div class="container">
+        <div class="form-card vidro">
+            <h1>{{ titulo }}</h1>
+            <form action="/criar" method="POST">
+                <div class="campo">
+                    <label>Exercício</label>
+                    <input type="text" name="exercicio" required>
+                </div>
+                <div class="campo">
+                    <label>Séries</label>
+                    <input type="number" name="series" min="1" required>
+                </div>
+                <div class="campo">
+                    <label>Repetições</label>
+                    <input type="number" name="repeticoes" min="1" required>
+                </div>
+                <div class="campo">
+                    <label>Peso (kg)</label>
+                    <input type="number" name="peso" step="0.5" min="0" required>
+                </div>
+                <div class="campo">
+                    <label>Data</label>
+                    <input type="date" name="data" required>
+                </div>
+                <div class="acoes">
+                    <button class="btn" type="submit">Salvar</button>
+                    <a class="btn" href="/">Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

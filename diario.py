@@ -5,9 +5,9 @@ app = Flask(__name__)
 
 
 lista=[]
-treino1 = Treino(1,'Supino reto', 3, 10, '2026-10-25')
-treino2 = Treino(2,'Supino inclinado', 3, 10, '2026-10-29')
-treino3 = Treino(3, 'Crucifixo', 2, 10, '2026-10-25')
+treino1 = Treino(1,'Supino reto', 3, 10, 40, '2026-10-25')
+treino2 = Treino(2,'Supino inclinado', 3, 10, 90, '2026-10-29')
+treino3 = Treino(3, 'Crucifixo', 2, 10, 70, '2026-10-25')
 lista.append(treino1)
 lista.append(treino2)
 lista.append(treino3)
@@ -16,7 +16,13 @@ lista.append(treino3)
 @app.route('/')
 def inicio():
     treinos_organizados = sorted(lista, key=lambda t: t.data, reverse=True)
-    return render_template('lista.html', titulo='Diario de treino', treinos=treinos_organizados )
+    dias = {}
+    for i in treinos_organizados:
+        if i.data not in dias:
+            dias[i.data]=[]
+        dias[i.data].append(i)
+            
+    return render_template('lista.html', titulo='Diario de treino', dias=dias )
 
 @app.route('/cadastrar')
 def cadastrar():
@@ -31,9 +37,10 @@ def criar():
     exercicio=request.form['exercicio']
     series=int(request.form['series'])
     repeticoes=int(request.form['repeticoes'])
+    peso=int(request.form['peso'])
     data=request.form['data']
 
-    treino10 = Treino(novo_id,exercicio,series,repeticoes,data )
+    treino10 = Treino(novo_id,exercicio,series,repeticoes,peso,data )
     lista.append(treino10)
     return redirect(url_for('inicio'))
 
