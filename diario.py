@@ -25,10 +25,9 @@ def inicio():
     lista = conexao.execute('SELECT * FROM treinos ORDER BY data DESC').fetchall()
     dias = {}
     for i in lista:
-        if 'data' not in dias:
-            dias['data']=[]
-        dias['data'].append(i)
-    conexao.commit()
+        if i['data'] not in dias:
+            dias[i['data']]=[]
+        dias[i['data']].append(i)
     conexao.close()
     return render_template('lista.html', titulo='Diario de treino', dias=dias )
 
@@ -49,13 +48,23 @@ def criar():
     conexao.close()
     return redirect(url_for('inicio'))
     
+@app.route('/editar/<int:id>', methods=['GET'])
+def editar(id):
+    conexao = conectar()
+    treino = conexao.execute('SELECT * FROM treinos WHERE id = ?',(id,)).fetchall()
+    conexao.close()
+    return render_template('editar.html', treino=treino)
+
+@app.route('/atualizar', methods=['POST'])
+def atualizar():
+    return redirect(url_for('inicio'))
 
 @app.route('/deletar/<int:id>', methods=['POST'])
 def deletar(id):
-    for i in lista:
-        if i.id == id:
-            lista.remove(i)
-            break
+    conexao = conectar()
+    conexao.execute('DELETE FROM treinos WHERE id = ?', (id,))
+    conexao.commit()
+    conexao.close()
     return redirect(url_for('inicio'))
 
 if __name__ == '__main__':

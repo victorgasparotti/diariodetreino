@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar treino</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form class="form-card vidro" method="post" action="{{ url_for('atualizar') }}">
+            <h1>Editar treino</h1>
+
+            <input type="hidden" name="id" value="{{ treino.id }}">
+
+            <div class="campo">
+                <label for="exercicio">Exercício</label>
+                <input type="text" id="exercicio" name="exercicio"
+                       value="{{ treino.exercicio }}" required>
+            </div>
+
+            <div class="campo">
+                <label for="series">Séries</label>
+                <input type="number" id="series" name="series"
+                       value="{{ treino.series }}" required>
+            </div>
+
+            <div class="campo">
+                <label for="repeticoes">Repetições</label>
+                <input type="number" id="repeticoes" name="repeticoes"
+                       value="{{ treino.repeticoes }}" required>
+            </div>
+
+            <div class="campo">
+                <label for="peso">Peso (kg)</label>
+                <input type="number" id="peso" name="peso" step="0.1"
+                       value="{{ treino.peso }}" required>
+            </div>
+
+            <div class="campo">
+                <label for="data">Data</label>
+                <input type="date" id="data" name="data"
+                       value="{{ treino.data }}" required>
+            </div>
+
+            <div class="acoes">
+                <button class="btn" type="submit">Salvar alterações</button>
+                <a class="btn" href="{{ url_for('inicio') }}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
