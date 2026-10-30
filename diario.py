@@ -1,8 +1,14 @@
 from flask import Flask, render_template, request, redirect, url_for
 from models import Treino
+import sqlite3
 
 app = Flask(__name__)
 
+
+def conectar():
+    conexao=sqlite3.connect('meu_banco.db')
+    conexao.row_factory = sqlite3.Row
+    return conexao
 
 lista=[]
 treino1 = Treino(1,'Supino reto', 3, 10, 40, '2026-10-25')
@@ -15,13 +21,15 @@ lista.append(treino3)
 
 @app.route('/')
 def inicio():
-    treinos_organizados = sorted(lista, key=lambda t: t.data, reverse=True)
+    conexao = conectar()
+    lista = conexao.execute('SELECT * FROM treinos ORDER BY data DESC').fetchall()
     dias = {}
-    for i in treinos_organizados:
-        if i.data not in dias:
-            dias[i.data]=[]
-        dias[i.data].append(i)
-            
+    for i in lista:
+        if 'data' not in dias:
+            dias['data']=[]
+        dias['data'].append(i)
+    conexao.commit()
+    conexao.close()
     return render_template('lista.html', titulo='Diario de treino', dias=dias )
 
 @app.route('/cadastrar')
@@ -30,19 +38,17 @@ def cadastrar():
 
 @app.route('/criar', methods=['POST'])
 def criar():
-    ids=[a.id for a in lista]
-    maior_id = max(ids, default=0)
-    novo_id = maior_id+1
-    
     exercicio=request.form['exercicio']
     series=int(request.form['series'])
     repeticoes=int(request.form['repeticoes'])
-    peso=int(request.form['peso'])
+    peso=float(request.form['peso'])
     data=request.form['data']
-
-    treino10 = Treino(novo_id,exercicio,series,repeticoes,peso,data )
-    lista.append(treino10)
+    conexao = conectar()
+    conexao.execute('INSERT INTO treinos (exercicio, series, repeticoes, peso, data) VALUES(?,?,?,?,?)',(exercicio, series, repeticoes, peso, data))
+    conexao.commit()
+    conexao.close()
     return redirect(url_for('inicio'))
+    
 
 @app.route('/deletar/<int:id>', methods=['POST'])
 def deletar(id):
