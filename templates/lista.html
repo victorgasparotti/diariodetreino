@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo }}</title>
+</head>
+<body>
+    <h1>{{ titulo }}</h1>
+    <a href="/cadastrar">Cadastrar</a>
+    <table border="1" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Exercício</th>
+                <th>Séries</th>
+                <th>Repetições</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for treino in treinos %}
+            <tr>
+                <td>{{ treino.exercicio }}</td>
+                <td>{{ treino.series }}</td>
+                <td>{{ treino.repeticoes }}</td>
+                <td>{{ treino.data }}</td>
+                <td>
+                    <form method="post" action="{{ url_for('deletar', id=treino.id)}}">
+                        <button type="submit">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

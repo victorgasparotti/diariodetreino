@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo }}</title>
+</head>
+<body>
+    <h1>{{ titulo }}</h1>
+
+    <form action="/criar" method="POST">
+        <p>
+            <label>Exercício</label><br>
+            <input type="text" name="exercicio" required>
+        </p>
+        <p>
+            <label>Séries</label><br>
+            <input type="number" name="series" min="1" required>
+        </p>
+        <p>
+            <label>Repetições</label><br>
+            <input type="number" name="repeticoes" min="1" required>
+        </p>
+        <p>
+            <label>Data</label><br>
+            <input type="date" name="data" required>
+        </p>
+        <button type="submit">Salvar</button>
+    </form>
+
+    <a href="/">Voltar</a>
+</body>
+</html>
