@@ -6,10 +6,14 @@
     <title>Entrar no Diário de Treino</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-    <div class="container">
-        <form class="form-card vidro" method="post" action="{{ url_for('login') }}">
-            <h1>Entrar</h1>
+<body class="auth-page">
+    <div class="container auth-container">
+        <form class="form-card vidro auth-card" method="post" action="{{ url_for('login') }}">
+            <h1>Bem-vindo de volta!</h1>
+            <p class="login-intro">
+                Seu espaço para registrar cada treino, acompanhar sua evolução
+                e manter o foco nos seus objetivos.
+            </p>
 
             {% with mensagens = get_flashed_messages() %}
                 {% if mensagens %}

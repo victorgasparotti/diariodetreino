@@ -119,3 +119,212 @@ form.inline { display: inline; }
 @media (max-width: 600px) {
   .topo { flex-direction: column; align-items: flex-start; }
 }
+
+.login-intro,
+.cadastro-intro {
+  margin: -10px 0 24px;
+  color: var(--texto-suave);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+/* ===== Ajustes para tablets e celulares ===== */
+.container {
+  width: min(100%, 860px);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dia {
+  overflow-x: auto;
+}
+
+.dia table {
+  min-width: 620px;
+}
+
+.form-card {
+  width: min(100%, 440px);
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 24px 14px;
+  }
+
+  .topo {
+    padding: 18px 20px;
+  }
+
+  .dia {
+    padding: 18px 16px;
+  }
+
+  th,
+  td {
+    padding: 10px 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 16px 10px;
+  }
+
+  .topo {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .topo h1 {
+    font-size: 1.35rem;
+  }
+
+  .topo .acoes,
+  .form-card .acoes {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .acoes .btn,
+  .acoes form,
+  .acoes form .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .form-card {
+    margin: 12px auto;
+    padding: 24px 18px;
+    border-radius: 22px;
+  }
+
+  .form-card h1 {
+    font-size: 1.35rem;
+  }
+
+  .dia {
+    padding: 16px 10px;
+    border-radius: 20px;
+  }
+
+  .btn {
+    min-height: 44px;
+  }
+}
+/* Telas de login e cadastro */
+.auth-page {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 4vw, 48px);
+}
+
+.auth-container {
+  width: min(100%, 720px);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: none;
+  min-height: min(680px, calc(100dvh - 64px));
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(24px, 6vw, 64px);
+}
+
+.login-intro,
+.cadastro-intro {
+  margin: -10px 0 24px;
+  color: var(--texto-suave);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  font-style: italic;
+  line-height: 1.65;
+}
+
+/* Avise quando a tabela precisar de rolagem lateral */
+.table-hint {
+  display: none;
+  margin: 0 0 12px;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+.dia {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.dia table {
+  min-width: 620px;
+}
+
+@media (max-width: 900px) {
+  .table-hint {
+    display: block;
+  }
+
+  .topo {
+    flex-wrap: wrap;
+  }
+
+  .topo .acoes {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 12px 8px;
+  }
+
+  .auth-page {
+    padding: 8px;
+  }
+
+  .auth-card {
+    min-height: calc(100dvh - 16px);
+    padding: 28px 20px;
+    border-radius: 22px;
+  }
+
+  .topo {
+    align-items: stretch;
+    flex-direction: column;
+    padding: 18px;
+  }
+
+  .topo .acoes,
+  .form-card .acoes {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .acoes .btn,
+  .acoes form,
+  .acoes form .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dia {
+    padding: 16px 10px;
+  }
+
+  .table-hint {
+    font-size: 0.85rem;
+  }
+}

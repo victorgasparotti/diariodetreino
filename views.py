@@ -48,21 +48,20 @@ def editar(id):
 def atualizar():
     try:
         if 'usuario_id' not in session:
-            id = int(request.form['id'])
             return redirect(url_for('login'))
+        id = int(request.form['id'])
         exercicio=request.form['exercicio']
         series=int(request.form['series'])
         repeticoes=int(request.form['repeticoes'])
         peso=float(request.form['peso'])
         data=request.form['data']
-        id_usuario=request.form['id_usuario']
         if series >=1 and repeticoes >= 1 and peso >=0 and data.strip():
             conexao = conectar()
             conexao.execute('''
                 UPDATE treinos
-                SET id_usuario = ?,exercicio = ?, series = ?, repeticoes = ?, peso = ?, data = ?
-                WHERE id = ?
-            ''',(id_usuario,exercicio,series,repeticoes,peso,data,id))
+                SET exercicio = ?, series = ?, repeticoes = ?, peso = ?, data = ?
+                WHERE id = ? AND usuario_id = ?
+            ''',(exercicio,series,repeticoes,peso,data,id,session['usuario_id']))
             conexao.commit()
             conexao.close()
             return redirect(url_for('inicio'))
