@@ -24,14 +24,6 @@ cursor.execute('''
 ''')
 conexao.commit()
 
-print("Usuários:", cursor.execute(
-    "SELECT id, nome_usuario FROM usuarios"
-).fetchall())
-
-print("Treinos sem usuário:", cursor.execute(
-    "SELECT id, exercicio, usuario_id FROM treinos WHERE usuario_id IS NULL"
-).fetchall())
-
 cursor.execute(
     '''
     UPDATE treinos
