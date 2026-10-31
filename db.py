@@ -24,14 +24,4 @@ cursor.execute('''
 ''')
 conexao.commit()
 
-cursor.execute(
-    '''
-    UPDATE treinos
-    SET usuario_id = (SELECT id FROM usuarios WHERE nome_usuario = ?)
-    WHERE usuario_id IS NULL
-    ''',
-    ('victorgasparotti@gmail.com',)
-)
-conexao.commit()
-
 conexao.close()
