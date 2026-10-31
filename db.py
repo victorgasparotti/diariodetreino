@@ -23,8 +23,6 @@ cursor.execute('''
     )
 ''')
 conexao.commit()
-colunas = cursor.execute("PRAGMA table_info(treinos)").fetchall()
-nomes_das_colunas = [coluna[1] for coluna in colunas]
 
 print("Usuários:", cursor.execute(
     "SELECT id, nome_usuario FROM usuarios"
