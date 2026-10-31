@@ -2,6 +2,7 @@ from flask import Flask
 import sqlite3
 import os
 from dotenv import load_dotenv
+import db
 
 load_dotenv()
 
