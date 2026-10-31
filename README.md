@@ -48,5 +48,5 @@ Hospedagem
 O projeto está hospedado no Render. O comando de inicialização é:
 gunicorn diario:app
 Configure SECRET_KEY nas variáveis de ambiente do serviço de hospedagem. Não publique nem compartilhe o valor dessa chave.
-Autor
-Victor Gasparotti
+
+Autor: Victor Gasparotti
