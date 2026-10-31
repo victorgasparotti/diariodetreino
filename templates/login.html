@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar no Diário de Treino</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <form class="form-card vidro" method="post" action="{{ url_for('login') }}">
+            <h1>Entrar</h1>
+
+            {% with mensagens = get_flashed_messages() %}
+                {% if mensagens %}
+                    {% for mensagem in mensagens %}
+                        <p>{{ mensagem }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="campo">
+                <label for="nome_usuario">Nome de usuário</label>
+                <input type="text" id="nome_usuario" name="nome_usuario" required>
+            </div>
+
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+
+            <div class="acoes">
+                <button class="btn" type="submit">Entrar</button>
+                <a class="btn" href="{{ url_for('cadastro') }}">Criar conta</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

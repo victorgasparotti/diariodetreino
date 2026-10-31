@@ -3,51 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar treino</title>
+    <title>{{ titulo }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <form class="form-card vidro" method="post" action="{{ url_for('atualizar') }}">
-            <h1>Editar treino</h1>
+        <header class="topo vidro">
+            <h1>{{ titulo }}</h1>
 
-            <input type="hidden" name="id" value="{{ treino.id }}">
+            <nav class="acoes">
+                <a class="btn" href="{{ url_for('login') }}">Login</a>
+                <a class="btn" href="{{ url_for('cadastro') }}">Cadastrar</a>
 
-            <div class="campo">
-                <label for="exercicio">Exercício</label>
-                <input type="text" id="exercicio" name="exercicio"
-                       value="{{ treino.exercicio }}" required>
-            </div>
+                <form class="inline" method="post" action="{{ url_for('logout') }}">
+                    <button class="btn" type="submit">Logout</button>
+                </form>
+            </nav>
+        </header>
 
-            <div class="campo">
-                <label for="series">Séries</label>
-                <input type="number" id="series" name="series"
-                       value="{{ treino.series }}" required>
-            </div>
+        {% for data, treino_do_dia in dias.items() %}
+        <section class="dia vidro">
+            <h2>{{ data }}</h2>
 
-            <div class="campo">
-                <label for="repeticoes">Repetições</label>
-                <input type="number" id="repeticoes" name="repeticoes"
-                       value="{{ treino.repeticoes }}" required>
-            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exercício</th>
+                        <th>Séries</th>
+                        <th>Repetições</th>
+                        <th>Peso</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for treino in treino_do_dia %}
+                    <tr>
+                        <td>{{ treino.exercicio }}</td>
+                        <td>{{ treino.series }}</td>
+                        <td>{{ treino.repeticoes }}</td>
+                        <td>{{ treino.peso }} kg</td>
+                        <td>
+                            <a class="btn" href="{{ url_for('editar', id=treino.id) }}">Editar</a>
 
-            <div class="campo">
-                <label for="peso">Peso (kg)</label>
-                <input type="number" id="peso" name="peso" step="0.1"
-                       value="{{ treino.peso }}" required>
-            </div>
-
-            <div class="campo">
-                <label for="data">Data</label>
-                <input type="date" id="data" name="data"
-                       value="{{ treino.data }}" required>
-            </div>
-
-            <div class="acoes">
-                <button class="btn" type="submit">Salvar alterações</button>
-                <a class="btn" href="{{ url_for('inicio') }}">Cancelar</a>
-            </div>
-        </form>
+                            <form class="inline" method="post"
+                                  action="{{ url_for('deletar', id=treino.id) }}">
+                                <button class="btn btn-perigo" type="submit">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        {% endfor %}
     </div>
 </body>
 </html>
