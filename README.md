@@ -23,6 +23,8 @@ Aplicação web para registrar e organizar treinos. Cada usuário pode criar uma
 - HTML
 - CSS
 
+- Observação sobre os dados: o projeto está hospedado no plano gratuito do Render e usa SQLite sem armazenamento persistente. Por isso, os dados de login e os treinos podem ser apagados quando o serviço reinicia. O banco ainda não tem persistência garantida na hospedagem.
+
 ## Executar localmente
 
 1. Clone o repositório:
