@@ -10,7 +10,8 @@ cursor.execute('''
     series INTEGER NOT NULL,
     repeticoes INTEGER NOT NULL,
     peso REAL NOT NULL,
-    data TEXT NOT NULL
+    data TEXT NOT NULL,
+    usuario_id INTEGER NOT NULL
     )
 ''')
 conexao.commit()
