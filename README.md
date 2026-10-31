@@ -22,8 +22,6 @@ Aplicação web para registrar e organizar treinos. Cada usuário pode criar uma
 - SQLite
 - HTML
 - CSS
-- Werkzeug
-- Gunicorn
 
 ## Executar localmente
 
