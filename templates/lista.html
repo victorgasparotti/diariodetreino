@@ -15,6 +15,7 @@
 
             <nav class="acoes">
                 {% if session.get('usuario_id') %}
+                <a class="btn" href="{{ url_for('cadastrar') }}">+ Cadastrar treino</a>
                 <form class="inline" method="post" action="{{ url_for('logout') }}">
                     <button class="btn" type="submit">Logout</button>
                 </form>

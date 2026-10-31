@@ -48,27 +48,28 @@ def editar(id):
 def atualizar():
     try:
         if 'usuario_id' not in session:
+            id = int(request.form['id'])
             return redirect(url_for('login'))
         exercicio=request.form['exercicio']
         series=int(request.form['series'])
         repeticoes=int(request.form['repeticoes'])
         peso=float(request.form['peso'])
         data=request.form['data']
-        id = int(request.form['id'])
+        id_usuario=request.form['id_usuario']
         if series >=1 and repeticoes >= 1 and peso >=0 and data.strip():
             conexao = conectar()
             conexao.execute('''
                 UPDATE treinos
-                SET exercicio = ?, series = ?, repeticoes = ?, peso = ?, data = ?
+                SET id_usuario = ?,exercicio = ?, series = ?, repeticoes = ?, peso = ?, data = ?
                 WHERE id = ?
-            ''',(exercicio,series,repeticoes,peso,data,id))
+            ''',(id_usuario,exercicio,series,repeticoes,peso,data,id))
             conexao.commit()
             conexao.close()
             return redirect(url_for('inicio'))
         else:
             flash('Dados inválidos')
             conexao = conectar()
-            treino = conexao.execute('SELECT * FROM treinos WHERE id = ?',(id,)).fetchone()
+            treino = conexao.execute('SELECT * FROM treinos WHERE id = ? AND usuario_id = ?',(id,session['usuario_id'])).fetchone()
             conexao.close()
             return render_template('editar.html', treino=treino)
     except ValueError:
